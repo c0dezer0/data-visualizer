@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var sleep = require('sleep');
 app.use( bodyParser.json() ); 
 
+app.set('port', (process.env.PORT || 9000));
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
@@ -113,7 +114,8 @@ console.log(mapdata+"this is data");
 	});
  }*/
 
-var host = (process.env.VCAP_APP_HOST || 'localhost');
-var port = (process.env.VCAP_APP_PORT || 3000);
-app.listen(port, host);
-console.log('App started on port ' + port);
+// var host = (process.env.VCAP_APP_HOST || 'localhost');
+// var port = (process.env.VCAP_APP_PORT || 3000);
+app.listen(app.get('port'), function() {
+console.log("Node app is running at port:" + app.get('port'))
+});
